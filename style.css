@@ -1,0 +1,67 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+header .logo {
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin-left: auto;
+  margin-right: 20px;
+  gap: 20px;
+}
+
+nav ul li {
+  cursor: pointer;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.content-section {
+  display: none; /* 숨기기 */
+  padding: 20px;
+}
+
+.content-section.active {
+  display: block; /* 현재 활성화된 섹션만 보이게 */
+}
+
+.big-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.quick-menu {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+footer {
+  background: #f2f2f2;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 30px;
+}

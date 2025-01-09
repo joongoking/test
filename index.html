@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>중고거래 분쟁해결 센터</title>
+  <!-- 부트스트랩 5 CDN CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- 선택사항: 부트스트랩 아이콘 CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <style>
+    /* 추가 커스텀 CSS */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    .hero-section {
+      background: url('https://source.unsplash.com/1600x400/?shopping') no-repeat center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    }
+    .hero-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transition: 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <!-- 부트스트랩 NavBar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">분쟁해결센터</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#disputeForm">분쟁접수</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#status">진행현황</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#guide">분쟁가이드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#faq">FAQ/사례</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#report">고발서류지원</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">고객센터</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section d-flex">
+    <h1>중고거래 분쟁해결, AI가 도와드립니다!</h1>
+  </section>
+
+  <main class="container py-5">
+    <!-- Quick Menu -->
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-6 text-center">
+        <h2 class="mb-4">원하시는 서비스를 선택하세요</h2>
+        <div class="d-grid gap-2 d-md-block">
+          <button class="btn btn-primary" onclick="scrollToSection('disputeForm')">
+            <i class="bi bi-arrow-right-circle"></i> 분쟁접수 바로가기
+          </button>
+          <button class="btn btn-warning" onclick="alert('고가품 감정 신청 페이지로 이동')">
+            <i class="bi bi-gem"></i> 고가품 감정 신청
+          </button>
+          <button class="btn btn-success" onclick="alert('환불 절차 안내 페이지로 이동')">
+            <i class="bi bi-arrow-counterclockwise"></i> 환불 절차 안내
+          </button>
+          <button class="btn btn-danger" onclick="alert('전문 상담원 연결 페이지로 이동')">
+            <i class="bi bi-headset"></i> 전문 상담원 연결
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 분쟁접수 -->
+    <section id="disputeForm" class="mb-5">
+      <h3 class="mb-3">분쟁접수</h3>
+      <div class="card p-4">
+        <div class="mb-3">
+          <label for="disputeType" class="form-label fw-bold">분쟁 유형</label>
+          <select id="disputeType" class="form-select">
+            <option value="사기 의심">사기 의심</option>
+            <option value="물품 하자/불량">물품 하자/불량</option>
+            <option value="미발송/미수령">미발송/미수령</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="amount" class="form-label fw-bold">거래 금액(원)</label>
+          <input type="number" class="form-control" id="amount" placeholder="예: 100000" />
+        </div>
+        <div class="mb-3">
+          <label for="otherParty" class="form-label fw-bold">상대방 닉네임/계정</label>
+          <input type="text" class="form-control" id="otherParty" placeholder="예: seller123" />
+        </div>
+        <div class="mb-3">
+          <label for="detail" class="form-label fw-bold">상세 내용</label>
+          <textarea class="form-control" id="detail" rows="4" placeholder="분쟁 상황을 자세히 입력해주세요"></textarea>
+        </div>
+        <button class="btn btn-primary w-100" onclick="submitDispute()">
+          접수하기
+        </button>
+      </div>
+    </section>
+
+    <!-- 진행현황 -->
+    <section id="status" class="mb-5">
+      <h3 class="mb-3">진행현황</h3>
+      <p>아직 접수된 분쟁이 없습니다.</p>
+      <!-- 실제로는 JavaScript로 테이블 생성 or 목록 표출 -->
+      <!-- 예시: 
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>분쟁번호</th>
+            <th>물품명</th>
+            <th>유형</th>
+            <th>현재 단계</th>
+            <th>자세히</th>
+          </tr>
+        </thead>
+        <tbody id="statusTableBody">
+          ...
+        </tbody>
+      </table>
+      -->
+    </section>
+
+    <!-- 분쟁가이드 -->
+    <section id="guide" class="mb-5">
+      <h3 class="mb-3">분쟁가이드</h3>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">사기 의심</h5>
+              <p class="card-text">에스크로 결제 여부 확인, 거래 전 신뢰도 체크, AI 상담봇...</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">하자/파손</h5>
+              <p class="card-text">물품 수령 즉시 사진·영상 확보, 판매자와 즉시 협의, 필요 시 감정 요청...</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">미발송/미수령</h5>
+              <p class="card-text">송장번호 추적, 일정 기간 경과 시 AI 알림, 상대방 연락두절이면 신고...</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">명품/고가품</h5>
+              <p class="card-text">전문 감정서 발급, 보증서 첨부, 고가품 전용 안전결제 활용...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ / 사례 -->
+    <section id="faq" class="mb-5">
+      <h3 class="mb-3">FAQ / 사례</h3>
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqOne">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="false"
+              aria-controls="collapseOne"
+            >
+              분쟁접수는 어떻게 하나요?
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse"
+            aria-labelledby="faqOne"
+            data-bs-parent="#faqAccordion"
+          >
+            <div class="accordion-body">
+              상단 메뉴에서 [분쟁접수] 탭을 클릭한 뒤, 분쟁 유형과 상세내용을 입력해주세요.
+              필요한 사진(하자, 채팅 캡처 등)도 업로드하시면 좋습니다.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              사기 의심 사례를 알고 싶어요
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="faqTwo"
+            data-bs-parent="#faqAccordion"
+          >
+            <div class="accordion-body">
+              예) A유저 vs B유저 간 명품 거래 시, 업자가 아닌 개인이 지나치게 싼 가격을 제시...
+              <br/>
+              - AI가 위험 경고 메시지 발송  
+              - 거래 전 에스크로 사용 권고  
+              - 상대방 연락두절로 사기 신고  
+              - 고발서류 자동생성 → 경찰청 접수 등  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+      <h5>다른 실제 분쟁 사례(익명화)</h5>
+      <p>
+        예) <strong>C유저 vs D유저</strong> - 전자제품 하자 분쟁<br/>
+        판매자는 “정상작동” 주장, 구매자는 “켜지지 않는다” 주장<br/>
+        AI 비교분석 결과: 사진·영상 증거 상 불량 가능성 높음 → 환불안 조정
+      </p>
+    </section>
+
+    <!-- 고발서류지원 -->
+    <section id="report" class="mb-5">
+      <h3 class="mb-3">사기 발생 시 고발서류 자동작성</h3>
+      <div class="card p-4">
+        <div class="mb-3">
+          <label class="form-label fw-bold">피해 금액(원)</label>
+          <input type="number" class="form-control" placeholder="예: 200000" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">사건 개요</label>
+          <textarea class="form-control" rows="3" placeholder="사건 상세 내용을 입력하세요"></textarea>
+        </div>
+        <button class="btn btn-outline-danger w-100" onclick="alert('PDF 문서 생성')">
+          고소장 작성하기
+        </button>
+      </div>
+    </section>
+
+    <!-- 고객센터 -->
+    <section id="contact" class="mb-5">
+      <h3 class="mb-3">고객센터</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="p-3 border bg-light">
+            <h5>1:1 문의</h5>
+            <form>
+              <div class="mb-3">
+                <label class="form-label">이름</label>
+                <input type="text" class="form-control" placeholder="홍길동" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">이메일</label>
+                <input type="email" class="form-control" placeholder="abc@domain.com" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">문의내용</label>
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+              <button class="btn btn-primary w-100" type="submit">문의하기</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-3 border bg-light">
+            <h5>전화상담 안내</h5>
+            <p>운영시간: 평일 10:00 ~ 18:00</p>
+            <p>전화번호: 02-1234-5678</p>
+            <hr />
+            <h5>Q&A 게시판</h5>
+            <p>더 자세한 정보는 커뮤니티 게시판을 이용하세요.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">
+      Copyright ©
+      <span class="fw-bold">분쟁해결센터</span>
+    </p>
+  </footer>
+
+  <!-- 부트스트랩 JS (Popper 포함) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <script>
+    // 단순 스크롤 이동 함수
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // 분쟁 접수 시연용 함수
+    function submitDispute() {
+      const disputeType = document.getElementById('disputeType').value;
+      const amount = document.getElementById('amount').value;
+      const otherParty = document.getElementById('otherParty').value;
+      const detail = document.getElementById('detail').value;
+
+      if (!disputeType || !amount || !otherParty || !detail) {
+        alert('모든 항목을 입력해 주세요!');
+        return;
+      }
+
+      alert(
+        `분쟁 접수 완료!\n유형: ${disputeType}\n거래금액: ${amount}원\n상대방: ${otherParty}\n내용: ${detail}`
+      );
+      scrollToSection('status');
+    }
+  </script>
+</body>
+</html>
+
